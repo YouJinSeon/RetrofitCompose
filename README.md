@@ -27,5 +27,3 @@ Compose Glide :
 [Glide v4 : Compose](https://bumptech.github.io/glide/int/compose.html)
 
 2023 드로이드 나이츠 : https://github.com/droidknights/DroidKnights2023_App
-
-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
