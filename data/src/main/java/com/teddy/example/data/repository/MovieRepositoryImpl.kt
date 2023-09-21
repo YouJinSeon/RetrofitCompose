@@ -1,6 +1,8 @@
 package com.teddy.example.data.repository
 
 import com.teddy.example.data.MovieService
+import com.teddy.example.domain.model.MovieEntity
+import com.teddy.example.domain.model.RatingEntity
 import com.teddy.example.domain.model.SearchEntity
 import com.teddy.example.domain.model.SearchResultEntity
 import com.teddy.example.domain.repository.MovieRepository
@@ -28,6 +30,27 @@ class MovieRepositoryImpl @Inject constructor(
                 temp.totalResults
             )
             emit(data) // 데이터 방출
+        }
+    }
+
+    override suspend fun getMovieDetail(imdbID: String): Flow<MovieEntity?> {
+        return flow {
+            val temp = movieService.getMovieDetails("eea09d0c", imdbID)
+            val data = MovieEntity(
+                Title = temp.Title,
+                Actors = temp.Actors,
+                Country = temp.Country,
+                Director = temp.Director,
+                Poster = temp.Poster,
+                Genre = temp.Genre,
+                Rated = temp.Rated,
+                Plot = temp.Plot,
+                Awards = temp.Awards,
+                Ratings = temp.Ratings?.map { RatingEntity(it.Source, it.Value) },
+                Writer = temp.Writer,
+                Year = temp.Year
+            )
+            emit(data)
         }
     }
 }

@@ -1,5 +1,6 @@
 package com.teddy.example.data
 
+import com.teddy.example.data.model.Movie
 import com.teddy.example.data.model.SearchResult
 import retrofit2.http.GET
 import retrofit2.http.Query
@@ -15,5 +16,11 @@ interface MovieService {
         @Query(value = "apiKey") apiKey: String,
         @Query(value = "page") pageIndex: Int
     ): SearchResult
+
+    @GET("?plot=full")
+    suspend fun getMovieDetails(
+        @Query(value = "apiKey") apiKey: String,
+        @Query(value = "i") imdbId: String
+    ) : Movie
 
 }
